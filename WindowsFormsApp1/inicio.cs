@@ -66,5 +66,28 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Error al eliminar nombre");
             }
         }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            // Puedes usar un SaveFileDialog para que el usuario elija la ruta
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Archivo Excel (*.xlsx)|*.xlsx";
+                saveFileDialog.Title = "Exportar nombres a Excel";
+                saveFileDialog.FileName = "Nombres.xlsx";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    bool resultado = acciones.ExportarNombresAExcel(saveFileDialog.FileName);
+                    if (resultado)
+                    {
+                        MessageBox.Show("Nombres exportados correctamente");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al exportar los nombres");
+                    }
+                }
+            }
+        }
     }
 }
